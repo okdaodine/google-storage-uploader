@@ -29,6 +29,10 @@ const bucket = storage.bucket(bucketName)
 bucket.upload(
   src,
   {
+    gzip: true,
+    metadata: {
+      cacheControl: 'public, max-age=31536000',
+    },
     destination: dest.endsWith('/') ? `${dest}${src.split('/').pop()}` : dest,
   },
   function (err) {
